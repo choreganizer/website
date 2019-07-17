@@ -5,42 +5,23 @@ import { auth, database } from '../src/firebase';
 export default class login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { email: '', username: '', pass: '' };
+    this.state = { username: '', pass: '' };
   }
 
   handleSignIn = () => {
-    const { email, username, pass } = this.state;
-    let uid = '';
-    database.ref(`usernames/${username}`).once('value', (usernameSnapshot) => {
-      uid = usernameSnapshot.val().uid;
+    const { username, pass } = this.state;
+    let mail = '';
+    database.ref(`usernames/${username}/email`).once('value', (usernameSnapshot) => {
+      // console.log(usernameSnapshot.val().email);
+      mail = usernameSnapshot.val();
     }).then(() => {
-      database.ref(`users/${uid}`).once('value', (userSnapshot) => {
-        this.setState({ email: userSnapshot.val().email });
-      }).then(() => {
-        auth.signInWithEmailAndPassword(email, pass).then(() => {
-          router.push('/dashboard');
-        }).catch((err) => {
-          alert(err);
-        });
+      // console.log(email);
+      auth.signInWithEmailAndPassword(mail, pass).then(() => {
+        router.push('/dashboard');
+      }).catch((err) => {
+        console.log(err);
       });
     });
-    // database.ref(`usernames/${username}`).once('value', (usernameSnapshot) => {
-    //   const { uid } = usernameSnapshot.val();
-    //   database.ref(`users/${uid}`).once('value', (userSnapshot) => {
-    //     console.log(userSnapshot.val());
-    //     const userEmail = userSnapshot.val().email;
-
-    //     this.setState({ email: userEmail });
-    //   });
-    // });
-    // auth.signInWithEmailAndPassword(email, pass)
-    //   .then(() => {
-    //     router.push('/dashboard');
-    //   })
-    //   .catch((err) => {
-    //     alert('OOps something went wrong check your console');
-    //     console.log(err);
-    //   });
   }
 
   handleUsernameChange = (e) => {
