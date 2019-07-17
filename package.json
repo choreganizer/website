@@ -1,0 +1,48 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "export": "next export",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com-vacharbh:choreganizer/website.git"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "keywords": [],
+  "author": "Choreganizers",
+  "license": "ISC",
+  "dependencies": {
+    "@zeit/next-sass": "^1.0.1",
+    "classnames": "^2.2.6",
+    "dotenv": "^8.0.0",
+    "firebase": "^6.2.4",
+    "isomorphic-fetch": "^2.2.1",
+    "next": "^9.0.0",
+    "next-offline": "^4.0.2",
+    "next-sass": "^1.0.3",
+    "node-sass": "^4.12.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.2",
+    "bulma": "^0.7.5",
+    "eslint": "^6.0.1",
+    "eslint-config-airbnb": "^17.1.1",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.2"
+  }
+}
