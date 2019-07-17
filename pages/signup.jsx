@@ -35,8 +35,9 @@ export default class signup extends React.Component {
           database.ref(`usernames/${username}`).set({
             uid,
             email,
+          }).then(() => {
+            router.push('/dashboard');
           });
-          router.push('/dashboard');
         })
         .catch((err) => {
           alert('OOps something went wrong check your console');
