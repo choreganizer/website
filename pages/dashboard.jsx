@@ -22,10 +22,12 @@ class Dashboard extends React.Component {
     return (
       <div className="columns">
         <div className="column is-one-fifth">
-          <div className="box no-shadow " />
+          <a className="button is-large is-fullwidth">Large</a>
         </div>
         <div className="column">
-          <div className="box" />
+          <div className="box">
+            <p className="title is-size-4 has-text-centered has-text-primary"> Welcome home </p>
+          </div>
         </div>
       </div>
     );
