@@ -7,9 +7,9 @@ import '../styles/application.scss';
 import ReactDOM from 'react-dom'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faCheckSquare, faCoffee, faHome, faTasks, faPlusCircle, faEdit } from '@fortawesome/free-solid-svg-icons'
+import { faCheckSquare, faCoffee, faHome, faTasks, faPlusCircle, faEdit, faCheck } from '@fortawesome/free-solid-svg-icons'
 
-library.add(fab, faCheckSquare, faCoffee, faHome, faTasks, faPlusCircle, faEdit)
+library.add(fab, faCheckSquare, faCoffee, faHome, faTasks, faPlusCircle, faEdit, faCheck)
 
 export default class extends App {
   render() {

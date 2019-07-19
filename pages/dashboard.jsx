@@ -75,7 +75,7 @@ class Dashboard extends React.Component {
                   <div className="column is-one-third">
                     <div className="box">
                         <label className="label has-text-centered has-text-primary">Your Tasks</label>
-                        <text className="label has-text-left has-text-grey">- Vacuum living room.</text>
+                        <button className="button is-fullwidth has-text-left has-text-grey"><FontAwesomeIcon icon="check" color='#B3D9DE'/> Vacuum living room. </button>
                         <text className="label has-text-left has-text-grey">So I was thinking that we would display the
                         list of user's chores from the database here. It updates whenever we "Add Chore". Also,
                         it would be cool if we could check it off and delete the items we finished.</text>
@@ -84,6 +84,13 @@ class Dashboard extends React.Component {
                   <div className="column is-one-third">
                     <div className="box">
                         <label className="label has-text-centered has-text-primary">Members</label>
+                        <button className="button is-fullwidth has-text-primary">
+                          "Member 1 userid/name"
+                        </button>
+                        <button className="button is-rounded is-fullwidth has-text-primary">
+                          <FontAwesomeIcon icon="plus-circle" size="1x" color='#B3D9DE'/> {/*color='primary' also works*/}
+                          ADD A MEMBER
+                        </button>
                     </div>
                   </div>
                   <div className="column is-one-third">
