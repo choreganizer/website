@@ -23,7 +23,6 @@ class Dashboard extends React.Component {
     return (
       <div className="columns">
         <div className="column is-one-fifth">
-<<<<<<< HEAD
           <figure className="image container is-128x128 has-text-centered">
             <img className="is-rounded" alt="user profile" src="https://bulma.io/images/placeholders/96x96.png" />
           </figure>
@@ -38,13 +37,9 @@ class Dashboard extends React.Component {
               Create New House
             </button>
           </div>
-=======
-          <a className="button is-large is-fullwidth">Large</a>
->>>>>>> 105b68021d00c56e0fbd123093ef08a8607073f5
         </div>
         {/*}<div className="column is-two-fifths"></div>*/}
         <div className="column">
-<<<<<<< HEAD
           <div className="box" >
                 <h1 className="title is-size-3 is-size-5-mobile has-text-centered has-text-primary">
                   Welcome Back, Username!
@@ -57,11 +52,6 @@ class Dashboard extends React.Component {
             <i class="fas fa-home"></i>
           </span>*/}
 
-=======
-          <div className="box">
-            <p className="title is-size-4 has-text-centered has-text-primary"> Welcome home </p>
-          </div>
->>>>>>> 105b68021d00c56e0fbd123093ef08a8607073f5
         </div>
       </div>
     );
