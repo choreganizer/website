@@ -68,32 +68,31 @@ class Navbar extends React.Component {
 
     return (
       <nav id="main-navbar" className="navbar is-primary">
-        <div className="container">
-          <div className="navbar-brand">
-            <Link href="/">
-              <a className="navbar-item has-text-weight-bold" role="navigation" onClick={this.closeMenu}>
-                <span className="is-size-5">CHOREGANIZER</span>
-              </a>
-            </Link>
+        <div className="navbar-brand">
+          <Link href="/">
+            <a className="navbar-item has-text-weight-bold" role="navigation" onClick={this.closeMenu}>
+              <span className="is-size-5">CHOREGANIZER</span>
+            </a>
+          </Link>
 
-            <div className={classnames('navbar-burger', 'burger', { 'is-active': active })} role="navigation" onClick={this.toggleMenu}>
-              <span />
-              <span />
-              <span />
-            </div>
+          <div className={classnames('navbar-burger', 'burger', { 'is-active': active })} role="navigation" onClick={this.toggleMenu}>
+            <span />
+            <span />
+            <span />
           </div>
+        </div>
 
-          <div className={classnames('navbar-menu', 'header', { 'is-active': active })}>
-            <div className="navbar-end">
-              {isAuth ? (
-                <div className="field navbar-item">
-                  <p className="control">
-                    <Link href="/">
-                      <a className={classnames('button', 'is-fullwidth', 'is-rounded', ' is-danger', { 'is-active': route === '/' })} role="navigation" onClick={this.handleLogout}>LOGOUT</a>
-                    </Link>
-                  </p>
-                </div>
-              ) : (
+        <div className={classnames('navbar-menu', 'header', { 'is-active': active })}>
+          <div className="navbar-end">
+            {isAuth ? (
+              <div className="field navbar-item">
+                <p className="control">
+                  <Link href="/">
+                    <a className={classnames('button', 'is-fullwidth', 'is-rounded', ' is-danger', { 'is-active': route === '/' })} role="navigation" onClick={this.handleLogout}>LOGOUT</a>
+                  </Link>
+                </p>
+              </div>
+            ) : (
                 <div className="field navbar-item is-grouped">
                   <p className="control">
                     <Link href="/signup">
@@ -105,13 +104,12 @@ class Navbar extends React.Component {
                   <p className="control">
                     <Link href="/login">
                       <a className="button is-fullwidth has-text-primary is-rounded is-inverted is-outlined" role="navigation" onClick={this.closeMenu}>
-                          LOG IN
+                        LOG IN
                       </a>
                     </Link>
                   </p>
                 </div>
               )}
-            </div>
           </div>
         </div>
       </nav>
