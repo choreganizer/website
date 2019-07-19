@@ -33,21 +33,7 @@ the $milkyWhite is named "link"*/
           </figure>
           {/*userid label directly under the profile pic*/}
           <label className="label  has-text-centered has-text-link">{username}</label>
-          {/*Add chore button*/}
-          <button className="button is-rounded is-fullwidth has-background-link has-text-warning">
-            <FontAwesomeIcon icon="plus-circle" size="1x" color='#91C7CE'/>
-            ADD CHORE
-          </button>
-          {/*Input field for adding chores*/}
-          <div className="field">
-            <div className="control">
-              <input className="input" name="chore" type="text" /*onChange={this.handleInputChange}*/ placeholder="Vacuum the living room" />
-            </div>
-            {/*Submit button for adding chores, on-click will add chore to database*/}
-            <button className="button is-rounded has-text-warning has-background-link" >
-              Add
-            </button>
-          </div>
+
           <div className="box is-invisible is-marginless"></div>
           {/*"Your Places" label, trying to get it to look like Vania's design*/}
           <div className="columns">
@@ -79,7 +65,7 @@ the $milkyWhite is named "link"*/
                     <FontAwesomeIcon icon="tasks" size="2x" color='#B3D9DE'/>
                 </figure>
                 {/*Box to fill up space lol*/}
-                <div className="box is-invisible is-marginless"></div>
+                <div className="box is-invisible is-paddingless"></div>
                 <div className="field"></div>
                 {/*Bottom 3 columns for tasks, members, edit house boxes*/}
                 <div className="columns">
@@ -110,6 +96,22 @@ the $milkyWhite is named "link"*/
                         <FontAwesomeIcon icon="edit" color='#91C7CE'/>
                         Edit House
                       </button>
+                      <div className="box is-invisible is-paddingless"></div> {/*Spacer*/}
+                      {/*Add chore button*/}
+                      <button className="button is-rounded is-fullwidth has-background-link has-text-warning">
+                        <FontAwesomeIcon icon="plus-circle" size="1x" color='#91C7CE'/>
+                        ADD CHORE
+                      </button>
+                      {/*Input field for adding chores*/}
+                      <div className="field">
+                        <div className="control">
+                          <input className="input" name="chore" type="text" /*onChange={this.handleInputChange}*/ placeholder="Vacuum the living room" />
+                        </div>
+                        {/*Submit button for adding chores, on-click will add chore to database*/}
+                        <button className="button is-rounded has-text-warning has-background-link" >
+                          Add
+                        </button>
+                      </div>
                   </div>
                 </div>
                 <div className="field"></div>
