@@ -51,18 +51,19 @@ the $milkyWhite is named "link"*/
           <div className="box is-invisible is-marginless"></div>
           {/*"Your Places" label, trying to get it to look like Vania's design*/}
           <div className="columns">
-            <div className="column is-half has-background-warning is-paddingless">
+            <div className="column is-two-thirds has-background-warning is-paddingless">
               <div className="block is-fullwidth has-background-warning is-paddingless">
                 <label className="label is-pulled-right has-text-link has-text-weight-normal">YOUR PLACES</label>
               </div>
             </div>
           </div>
-          <div className="box ">
-            <button className="button is-rounded is-fullwidth has-text-warning has-background-link">
-              <FontAwesomeIcon icon="plus-circle" size="1x" color='#91C7CE'/> {/*color='primary' also works*/}
-              SET UP A HOUSE
-            </button>
+          <div className="box has-background-link">
+            <FontAwesomeIcon icon="home" size="2x" color='#91C7CE'/>
           </div>
+          <button className="button is-rounded is-fullwidth has-text-warning has-background-link">
+            <FontAwesomeIcon icon="plus-circle" size="1x" color='#91C7CE'/>
+            SET UP A HOUSE
+          </button>
         </div>
         {/*Right side of website*/}
         <div className="column">
@@ -83,31 +84,29 @@ the $milkyWhite is named "link"*/
                 {/*Bottom 3 columns for tasks, members, edit house boxes*/}
                 <div className="columns">
                   <div className="column is-one-third">
-                    <div className="box">
+                    <div className="box has-background-link">
                         <label className="label has-text-centered has-text-warning has-text-weight-normal">Your Tasks</label>
-                        <button className="button is-fullwidth has-text-left has-text-grey-light"><FontAwesomeIcon icon="check" color='#B3D9DE'/> Vacuum living room. </button>
-                        <text className="label has-text-left has-text-grey-light has-text-weight-normal">So I was thinking that we would display the
-                        list of user's chores from the database here. It updates whenever we "Add Chore". Also,
-                        it would be cool if we could check it off and delete the items we finished.</text>
+                        <button className="button is-fullwidth has-text-left has-text-warning
+                        has-background-link"><FontAwesomeIcon icon="check" color='#B3D9DE'/> Vacuum living room. </button>
                     </div>
                   </div>
                   <div className="column is-one-third">
-                    <div className="box">
+                    <div className="box has-background-link">
                         <label className="label has-text-centered has-text-warning has-text-weight-normal">Members</label>
-                        <button className="button is-fullwidth has-text-warning">
+                        <button className="button is-fullwidth has-text-warning has-background-link">
                           Vania
                         </button>
-                        <button className="button is-fullwidth has-text-warning">
+                        <button className="button is-fullwidth has-text-warning has-background-link">
                           Ayden, etc.
                         </button>
-                        <button className="button is-rounded is-fullwidth has-text-warning">
+                        <button className="button is-rounded is-fullwidth has-text-warning has-background-link">
                           <FontAwesomeIcon icon="plus-circle" size="1x" color='#91C7CE'/> {/*color='primary' also works*/}
                           ADD A MEMBER
                         </button>
                     </div>
                   </div>
                   <div className="column is-one-third">
-                      <button className="button is-fullwidth has-text-warning">
+                      <button className="button is-fullwidth has-text-warning has-background-link">
                         <FontAwesomeIcon icon="edit" color='#91C7CE'/>
                         Edit House
                       </button>
