@@ -19,6 +19,7 @@ class Dashboard extends React.Component {
     });
   }
 
+
   render() {
     const { name, email, username } = this.state;
     return (
@@ -39,7 +40,7 @@ class Dashboard extends React.Component {
           {/*Input field for adding chores*/}
           <div className="field">
             <div className="control">
-              <input className="input" name="chore" type="text" /*onChange={function for chore database}*/ placeholder="Vacuum the living room" />
+              <input className="input" name="chore" type="text" /*onChange={this.handleInputChange}*/ placeholder="Vacuum the living room" />
             </div>
             {/*Submit button for adding chores, on-click will add chore to database*/}
             <button className="button is-rounded has-text-primary" >
@@ -69,14 +70,14 @@ class Dashboard extends React.Component {
                 <figure className="image container is-500x500 has-text-centered">
                     <FontAwesomeIcon icon="tasks" size="2x" color='#B3D9DE'/>
                 </figure>
-                <div className="box"></div>
+                <div className="box is-invisible"></div>
                 <div className="field"></div>
                 <div className="columns">
                   <div className="column is-one-third">
                     <div className="box">
                         <label className="label has-text-centered has-text-primary">Your Tasks</label>
-                        <button className="button is-fullwidth has-text-left has-text-grey"><FontAwesomeIcon icon="check" color='#B3D9DE'/> Vacuum living room. </button>
-                        <text className="label has-text-left has-text-grey">So I was thinking that we would display the
+                        <button className="button is-fullwidth has-text-left has-text-grey-light"><FontAwesomeIcon icon="check" color='#B3D9DE'/> Vacuum living room. </button>
+                        <text className="label has-text-left has-text-grey-light">So I was thinking that we would display the
                         list of user's chores from the database here. It updates whenever we "Add Chore". Also,
                         it would be cool if we could check it off and delete the items we finished.</text>
                     </div>
@@ -101,7 +102,7 @@ class Dashboard extends React.Component {
                   </div>
                 </div>
                 <div className="field"></div>
-                <div className="box"></div>
+                <div className="box is-invisible"></div>
           </div>
         </div>
       </div>
