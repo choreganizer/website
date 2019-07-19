@@ -28,10 +28,17 @@ class Dashboard extends React.Component {
           <figure className="image container is-128x128 has-text-centered">
             <img className="is-rounded" alt="user profile" src="https://bulma.io/images/placeholders/96x96.png" />
           </figure>
+          <label className="label  has-text-centered has-text-white">{username}</label>
           <button className="button is-rounded is-fullwidth has-text-primary">
             <FontAwesomeIcon icon="plus-circle" size="1x" color='#B3D9DE'/>
             ADD CHORE
           </button>
+          <div className="field">
+            <label className="label has-text-primary">Title of Chore</label>
+            <div className="control">
+              <input className="input" name="chore" type="text" /*onChange={function for chore database}*/ placeholder="Vacuum the living room" />
+            </div>
+          </div>
           <div className="box ">
             <label className="label has-text-primary">Your Places</label>
           </div>
