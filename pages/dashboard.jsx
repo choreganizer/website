@@ -75,7 +75,10 @@ class Dashboard extends React.Component {
                   <div className="column is-one-third">
                     <div className="box">
                         <label className="label has-text-centered has-text-primary">Your Tasks</label>
-                        <text className="label has-text-left has-text-grey">Vacuum living room.</text>
+                        <text className="label has-text-left has-text-grey">- Vacuum living room.</text>
+                        <text className="label has-text-left has-text-grey">So I was thinking that we would display the
+                        list of user's chores from the database here. It updates whenever we "Add Chore". Also,
+                        it would be cool if we could check it off and delete the items we finished.</text>
                     </div>
                   </div>
                   <div className="column is-one-third">
