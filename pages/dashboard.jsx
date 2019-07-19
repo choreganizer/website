@@ -19,7 +19,8 @@ class Dashboard extends React.Component {
     });
   }
 
-/*okay so bulma has limited color names, so i named the darker blue "warning"*/
+/*okay so bulma has limited color names, so i named the darker blue "warning"
+the $milkyWhite is named "link"*/
   render() {
     const { name, email, username } = this.state;
     return (
@@ -31,9 +32,9 @@ class Dashboard extends React.Component {
             <img className="is-rounded" alt="user profile" src="https://bulma.io/images/placeholders/96x96.png" />
           </figure>
           {/*userid label directly under the profile pic*/}
-          <label className="label  has-text-centered has-text-white">{username}</label>
+          <label className="label  has-text-centered has-text-link">{username}</label>
           {/*Add chore button*/}
-          <button className="button is-rounded is-fullwidth has-text-warning">
+          <button className="button is-rounded is-fullwidth has-background-link has-text-warning">
             <FontAwesomeIcon icon="plus-circle" size="1x" color='#91C7CE'/>
             ADD CHORE
           </button>
@@ -43,7 +44,7 @@ class Dashboard extends React.Component {
               <input className="input" name="chore" type="text" /*onChange={this.handleInputChange}*/ placeholder="Vacuum the living room" />
             </div>
             {/*Submit button for adding chores, on-click will add chore to database*/}
-            <button className="button is-rounded has-text-warning" >
+            <button className="button is-rounded has-text-warning has-background-link" >
               Add
             </button>
           </div>
@@ -52,12 +53,12 @@ class Dashboard extends React.Component {
           <div className="columns">
             <div className="column is-half has-background-warning is-paddingless">
               <div className="block is-fullwidth has-background-warning is-paddingless">
-                <label className="label is-pulled-right has-text-white has-text-weight-normal">YOUR PLACES</label>
+                <label className="label is-pulled-right has-text-link has-text-weight-normal">YOUR PLACES</label>
               </div>
             </div>
           </div>
-          <div className="box">
-            <button className="button is-rounded is-fullwidth has-text-warning">
+          <div className="box ">
+            <button className="button is-rounded is-fullwidth has-text-warning has-background-link">
               <FontAwesomeIcon icon="plus-circle" size="1x" color='#91C7CE'/> {/*color='primary' also works*/}
               SET UP A HOUSE
             </button>
@@ -65,17 +66,19 @@ class Dashboard extends React.Component {
         </div>
         {/*Right side of website*/}
         <div className="column">
-          <div className="box" >
+          <div className="box has-background-link" >
                 <h1 className="title is-size-3 is-size-5-mobile has-text-centered has-text-warning">
                   Welcome Home, {username}
                 </h1>
+                {/*Center Visual: House Icon*/}
                 <figure className="image container is-480x800 has-text-centered">
                     <FontAwesomeIcon icon="home" size="10x" color='#91C7CE'/>
                 </figure>
                 <figure className="image container is-500x500 has-text-centered">
                     <FontAwesomeIcon icon="tasks" size="2x" color='#B3D9DE'/>
                 </figure>
-                <div className="box is-invisible"></div>
+                {/*Box to fill up space lol*/}
+                <div className="box is-invisible is-marginless"></div>
                 <div className="field"></div>
                 {/*Bottom 3 columns for tasks, members, edit house boxes*/}
                 <div className="columns">
