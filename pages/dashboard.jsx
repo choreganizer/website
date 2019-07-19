@@ -48,8 +48,8 @@ class Dashboard extends React.Component {
             </button>
           </div>
           {/*"Your Places" label, trying to get it to look like Vania's design*/}
-          <div className="box ">
-            <label className="label has-text-primary">YOUR PLACES</label>
+          <div className="box is-pulled-left has-background-primary">
+            <label className="label has-text-white ">YOUR PLACES</label>
           </div>
           <div className="box">
             <button className="button is-rounded is-fullwidth has-text-primary">
