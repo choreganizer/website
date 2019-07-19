@@ -14,12 +14,13 @@ class Dashboard extends React.Component {
       this.setState({
         name: snapshot.val().name,
         email: snapshot.val().email,
+        username: snapshot.val().username
       });
     });
   }
 
   render() {
-    const { name, email } = this.state;
+    const { name, email, username } = this.state;
     return (
       <div className="columns">
         {/*Left side of website, the sidebar*/}
@@ -45,7 +46,7 @@ class Dashboard extends React.Component {
         <div className="column">
           <div className="box" >
                 <h1 className="title is-size-3 is-size-5-mobile has-text-centered has-text-primary">
-                  Welcome Back, Username!
+                  Welcome Back, {username}
                 </h1>
                 <figure className="image container is-480x800 has-text-centered">
                     <FontAwesomeIcon icon="home" size="10x" color='#B3D9DE'/>
