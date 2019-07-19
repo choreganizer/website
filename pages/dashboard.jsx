@@ -38,7 +38,6 @@ class Dashboard extends React.Component {
           </button>
           {/*Input field for adding chores*/}
           <div className="field">
-            <label className="label has-text-white">Title of Chore</label>
             <div className="control">
               <input className="input" name="chore" type="text" /*onChange={function for chore database}*/ placeholder="Vacuum the living room" />
             </div>
@@ -70,6 +69,28 @@ class Dashboard extends React.Component {
                 <figure className="image container is-500x500 has-text-centered">
                     <FontAwesomeIcon icon="tasks" size="2x" color='#B3D9DE'/>
                 </figure>
+                <div className="box"></div>
+                <div className="field"></div>
+                <div className="columns">
+                  <div className="column is-one-third">
+                    <div className="box">
+                        <label className="label has-text-centered has-text-primary">Your Tasks</label>
+                        <text className="label has-text-left has-text-grey">Vacuum living room.</text>
+                    </div>
+                  </div>
+                  <div className="column is-one-third">
+                    <div className="box">
+                        <label className="label has-text-centered has-text-primary">Members</label>
+                    </div>
+                  </div>
+                  <div className="column is-one-third">
+                      <button className="button is-fullwidth has-text-primary">
+                        <FontAwesomeIcon icon="edit" color='primary'/>
+                        Edit House
+                      </button>
+                  </div>
+                </div>
+                <div className="field"></div>
                 <div className="box"></div>
           </div>
         </div>
