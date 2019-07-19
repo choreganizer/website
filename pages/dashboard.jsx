@@ -19,7 +19,7 @@ class Dashboard extends React.Component {
     });
   }
 
-
+/*okay so bulma has limited color names, so i named the darker blue "warning"*/
   render() {
     const { name, email, username } = this.state;
     return (
@@ -33,8 +33,8 @@ class Dashboard extends React.Component {
           {/*userid label directly under the profile pic*/}
           <label className="label  has-text-centered has-text-white">{username}</label>
           {/*Add chore button*/}
-          <button className="button is-rounded is-fullwidth has-text-primary">
-            <FontAwesomeIcon icon="plus-circle" size="1x" color='#B3D9DE'/>
+          <button className="button is-rounded is-fullwidth has-text-warning">
+            <FontAwesomeIcon icon="plus-circle" size="1x" color='#91C7CE'/>
             ADD CHORE
           </button>
           {/*Input field for adding chores*/}
@@ -43,17 +43,22 @@ class Dashboard extends React.Component {
               <input className="input" name="chore" type="text" /*onChange={this.handleInputChange}*/ placeholder="Vacuum the living room" />
             </div>
             {/*Submit button for adding chores, on-click will add chore to database*/}
-            <button className="button is-rounded has-text-primary" >
+            <button className="button is-rounded has-text-warning" >
               Add
             </button>
           </div>
+          <div className="box is-invisible is-marginless"></div>
           {/*"Your Places" label, trying to get it to look like Vania's design*/}
-          <div className="box is-pulled-left has-background-primary">
-            <label className="label has-text-white ">YOUR PLACES</label>
+          <div className="columns">
+            <div className="column is-half has-background-warning is-paddingless">
+              <div className="block is-fullwidth has-background-warning is-paddingless">
+                <label className="label is-pulled-right has-text-white has-text-weight-normal">YOUR PLACES</label>
+              </div>
+            </div>
           </div>
           <div className="box">
-            <button className="button is-rounded is-fullwidth has-text-primary">
-              <FontAwesomeIcon icon="plus-circle" size="1x" color='#B3D9DE'/> {/*color='primary' also works*/}
+            <button className="button is-rounded is-fullwidth has-text-warning">
+              <FontAwesomeIcon icon="plus-circle" size="1x" color='#91C7CE'/> {/*color='primary' also works*/}
               SET UP A HOUSE
             </button>
           </div>
@@ -61,42 +66,46 @@ class Dashboard extends React.Component {
         {/*Right side of website*/}
         <div className="column">
           <div className="box" >
-                <h1 className="title is-size-3 is-size-5-mobile has-text-centered has-text-primary">
+                <h1 className="title is-size-3 is-size-5-mobile has-text-centered has-text-warning">
                   Welcome Home, {username}
                 </h1>
                 <figure className="image container is-480x800 has-text-centered">
-                    <FontAwesomeIcon icon="home" size="10x" color='#B3D9DE'/>
+                    <FontAwesomeIcon icon="home" size="10x" color='#91C7CE'/>
                 </figure>
                 <figure className="image container is-500x500 has-text-centered">
                     <FontAwesomeIcon icon="tasks" size="2x" color='#B3D9DE'/>
                 </figure>
                 <div className="box is-invisible"></div>
                 <div className="field"></div>
+                {/*Bottom 3 columns for tasks, members, edit house boxes*/}
                 <div className="columns">
                   <div className="column is-one-third">
                     <div className="box">
-                        <label className="label has-text-centered has-text-primary">Your Tasks</label>
+                        <label className="label has-text-centered has-text-warning has-text-weight-normal">Your Tasks</label>
                         <button className="button is-fullwidth has-text-left has-text-grey-light"><FontAwesomeIcon icon="check" color='#B3D9DE'/> Vacuum living room. </button>
-                        <text className="label has-text-left has-text-grey-light">So I was thinking that we would display the
+                        <text className="label has-text-left has-text-grey-light has-text-weight-normal">So I was thinking that we would display the
                         list of user's chores from the database here. It updates whenever we "Add Chore". Also,
                         it would be cool if we could check it off and delete the items we finished.</text>
                     </div>
                   </div>
                   <div className="column is-one-third">
                     <div className="box">
-                        <label className="label has-text-centered has-text-primary">Members</label>
-                        <button className="button is-fullwidth has-text-primary">
-                          "Member 1 userid/name"
+                        <label className="label has-text-centered has-text-warning has-text-weight-normal">Members</label>
+                        <button className="button is-fullwidth has-text-warning">
+                          Vania
                         </button>
-                        <button className="button is-rounded is-fullwidth has-text-primary">
-                          <FontAwesomeIcon icon="plus-circle" size="1x" color='#B3D9DE'/> {/*color='primary' also works*/}
+                        <button className="button is-fullwidth has-text-warning">
+                          Ayden, etc.
+                        </button>
+                        <button className="button is-rounded is-fullwidth has-text-warning">
+                          <FontAwesomeIcon icon="plus-circle" size="1x" color='#91C7CE'/> {/*color='primary' also works*/}
                           ADD A MEMBER
                         </button>
                     </div>
                   </div>
                   <div className="column is-one-third">
-                      <button className="button is-fullwidth has-text-primary">
-                        <FontAwesomeIcon icon="edit" color='primary'/>
+                      <button className="button is-fullwidth has-text-warning">
+                        <FontAwesomeIcon icon="edit" color='#91C7CE'/>
                         Edit House
                       </button>
                   </div>
