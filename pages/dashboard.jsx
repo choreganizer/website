@@ -86,17 +86,17 @@ the $milkyWhite is named "link"*/
                   <div className="column is-one-third">
                     <div className="box has-background-link">
                         <label className="label has-text-centered has-text-warning has-text-weight-normal">Your Tasks</label>
-                        <button className="button is-fullwidth has-text-left has-text-warning
-                        has-background-link"><FontAwesomeIcon icon="check" color='#B3D9DE'/> Vacuum living room. </button>
+                        <button className="button is-fullwidth has-text-left has-text-link
+                        has-background-warning"><FontAwesomeIcon icon="check" color='#B3D9DE'/> Vacuum living room. </button>
                     </div>
                   </div>
                   <div className="column is-one-third">
                     <div className="box has-background-link">
                         <label className="label has-text-centered has-text-warning has-text-weight-normal">Members</label>
-                        <button className="button is-fullwidth has-text-warning has-background-link">
+                        <button className="button is-fullwidth has-text-link has-background-warning">
                           Vania
                         </button>
-                        <button className="button is-fullwidth has-text-warning has-background-link">
+                        <button className="button is-fullwidth has-text-link has-background-warning">
                           Ayden, etc.
                         </button>
                         <button className="button is-rounded is-fullwidth has-text-warning has-background-link">
