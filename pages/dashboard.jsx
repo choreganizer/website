@@ -9,7 +9,7 @@ class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '', email: '', username: '', groups: [], isInGroup: false,
+      name: '', email: '', username: '', groups: [], chores: [], isInGroup: false,
     };
   }
 
@@ -38,7 +38,7 @@ class Dashboard extends React.Component {
   }
 
   clickCreateGroup = () => {
-    createGroup(generate(), auth.currentUser.uid).then((gid) => {
+    createGroup(this.state.addingGroupName, auth.currentUser.uid).then((gid) => {
       console.log(gid);
       // // this.setState({
       // //   groups: groups.push(gid),
@@ -83,8 +83,15 @@ class Dashboard extends React.Component {
 
   /* okay so bulma has limited color names, so i named the darker blue "warning"
 the $milkyWhite is named "link" */
+  /*old from dashboard*/
+  /*render() {
+    const { name, email, username } = this.state;*/
+  /*new from admin*/
   render() {
-    const { name, email, username } = this.state;
+    const {
+        chores, username, groups, isInGroup, groupSelection,
+        choreName, assignedToUsername, addingUsername, groupSelectionForAddingToGroup,
+      } = this.state;
     return (
       <div className="columns">
         {/* Left side of website, the sidebar */}
@@ -105,13 +112,28 @@ the $milkyWhite is named "link" */
               </div>
             </div>
           </div>
+          <div className="box buttons has-background-link">
+            {groups.map(obj => (
+              <button className="button is-fullwidth has-background-link has-text-warning" type="button" key={obj.groupID} onClick={() => this.deleteGroup(obj.groupID)}>{obj.groupName}</button>
+            ))}
+          </div>
           <div className="box has-background-link">
             <FontAwesomeIcon icon="home" size="2x" color="#91C7CE" />
           </div>
-          <button className="button is-rounded is-funellwidth has-text-warning has-background-link">
+          <button className="button is-rounded is-funellwidth has-text-warning has-background-link" onClick={this.printButton}>
             <FontAwesomeIcon icon="plus-circle" size="1x" color="#91C7CE" />
             SET UP A HOUSE
           </button>
+          <div className="field has-addons has-addons-centered">
+            <div className="control">
+              <input className="input" name="addingGroupName" type="text" placeholder="GroupName" onChange={this.handleInputChange} />
+            </div>
+            <div className="control">
+              <button className="button is-primary" type="button" onClick={this.clickCreateGroup}>
+                <FontAwesomeIcon icon="plus-circle" size="1x" color="#91C7CE" />
+              </button>
+            </div>
+          </div>
         </div>
         {/* Right side of website */}
         <div className="column">
@@ -134,10 +156,12 @@ the $milkyWhite is named "link" */
               <div className="column is-one-third">
                 <div className="box has-background-link">
                   <label className="label has-text-centered has-text-warning has-text-weight-normal">Your Tasks</label>
-                  <button className="button is-fullwidth has-text-left has-text-link
-                        has-background-warning"
-                  ><FontAwesomeIcon icon="check" color="#B3D9DE" /> Vacuum living room.
-                  </button>
+                  {/*Vybhav's additions*/}
+                  <div className="buttons">
+                    {chores.map(obj => (
+                      <button className="button is-fullwidth has-text-left has-text-link has-background-warning" type="button" key={obj.choreID} onClick={() => this.deleteChore(obj.choreID)}>{obj.choreName}</button>
+                    ))}
+                  </div>
                 </div>
               </div>
               <div className="column is-one-third">
@@ -153,6 +177,23 @@ the $milkyWhite is named "link" */
                     <FontAwesomeIcon icon="plus-circle" size="1x" color="#91C7CE" /> {/* color='primary' also works */}
                           ADD A MEMBER
                   </button>
+                  <div className="field has-addons has-addons-centered">
+                    <div className="control">
+                      <input className="input" name="addingUsername" type="text" placeholder="User Name" onChange={this.handleInputChange} />
+                    </div>
+                    <div className="select has-text-warning">
+                      <select name="groupSelectionForAddingToGroup has-text-warning" onChange={this.handleInputChange}>
+                        {groups.map(obj => (
+                          <option value={obj.groupID} key={obj.groupID}>{obj.groupName}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="control">
+                      <button className="button is-primary" type="button" onClick={() => addUserToGroup(addingUsername, groupSelectionForAddingToGroup)}>
+                        <FontAwesomeIcon icon="plus-circle" size="1x" color="#91C7CE" />
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="column is-one-third">
@@ -176,6 +217,8 @@ the $milkyWhite is named "link" */
                           Add
                   </button>
                 </div>
+                {/*Vybhav's chores*/}
+
               </div>
             </div>
             <div className="field" />
