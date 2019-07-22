@@ -86,12 +86,17 @@ class Navbar extends React.Component {
           <div className="navbar-end">
             {isAuth ? (
               <div className="field navbar-item">
-                <p className="control">
-                  <Link href="/">
-                    <a className={classnames('button', 'is-fullwidth', 'is-rounded', ' is-danger', { 'is-active': route === '/' })} role="navigation" onClick={this.handleLogout}>LOGOUT</a>
-                  </Link>
-                </p>
-              </div>
+                  <p className="control">
+                    <Link href="/dashboard">
+                      <a className={classnames('button', 'is-fullwidth', 'is-rounded', ' is-primary', { 'is-active': route === '/dashboard' })} role="navigation" >DASHBOARD</a>
+                    </Link>
+                  </p>
+                  <p className="control">
+                    <Link href="/">
+                      <a className={classnames('button', 'is-fullwidth', 'is-rounded', ' is-danger', { 'is-active': route === '/' })} role="navigation" onClick={this.handleLogout}>LOGOUT</a>
+                    </Link>
+                  </p>
+                </div>
             ) : (
                 <div className="field navbar-item is-grouped">
                   <p className="control">
