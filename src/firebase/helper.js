@@ -9,10 +9,10 @@ async function createGroup(name, creatorUserID) {
     }).then(() => {
       database.ref(`groups/${gId}`).set({
         groupName: name,
-        creatorUID: creatorUserID,
+        "creatorUID": creatorUserID,
       }).then(() => {
         database.ref(`groups/${gId}/members`).set({
-          creatorUID
+          creatorUserID
         },(error) => {
           if (error) {
             reject(error);
@@ -42,6 +42,12 @@ async function getGroups(uid) {
 }
 
 async function getMembers(gId) {
+  return new Promise((resolve, reject) =>{
+    database.ref(`groups/${gId}/members`).once('value').then((snapshot) => {
+      const members = []
+      snapshot.forEach
+    });
+  })
 }
 
 async function addChore(groupID, chore, assignedToUserName) {
@@ -106,6 +112,12 @@ async function addUserToGroup(username, groupID) {
         }
       });
     });
+  });
+}
+
+async function deleteChore(choreID){
+  return new Promise((resolve, reject) => {
+
   });
 }
 
