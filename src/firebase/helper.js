@@ -100,7 +100,7 @@ async function addUserToGroup(username, groupID) {
   return new Promise((resolve, reject) => {
     database.ref(`usernames/${username}/uid`).once('value').then((usernameSnapshot) => {
       const usernameUID = usernameSnapshot.val();
-      database.ref(`groups/${groupID}/members/`).set({
+      database.ref(`groups/${groupID}/members/`).push({
         [usernameUID]:usernameUID
       })
       database.ref(`usergroups/${usernameUID}/${groupID}`).set({
