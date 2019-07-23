@@ -30,6 +30,7 @@ async function getGroups(uid) {
     database.ref(`usergroups/${uid}`).once('value').then((snapshot) => {
       const groups = [];
       snapshot.forEach((child, index) => {
+        console.log(child.key)
         database.ref(`groups/${child.key}`).once('value').then((groupsSnapshot) => {
           groups.push({ groupName: groupsSnapshot.val().groupName, groupID: child.key });
         });
@@ -45,7 +46,7 @@ async function getMembers(gId) {
   return new Promise((resolve, reject) =>{
     database.ref(`groups/${gId}/members`).once('value').then((snapshot) => {
       const members = []
-      snapshot.forEach
+      snapshot
     });
   })
 }
@@ -100,7 +101,7 @@ async function addUserToGroup(username, groupID) {
     database.ref(`usernames/${username}/uid`).once('value').then((usernameSnapshot) => {
       const usernameUID = usernameSnapshot.val();
       database.ref(`groups/${groupID}/members/`).set({
-        usernameUID
+        [usernameUID]:usernameUID
       })
       database.ref(`usergroups/${usernameUID}/${groupID}`).set({
         [groupID]: 'admin',
