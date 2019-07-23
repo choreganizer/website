@@ -115,8 +115,15 @@ async function addUserToGroup(username, groupID) {
   });
 }
 
-async function deleteChore(choreID){
+async function deleteChore(userID, choreID){
   return new Promise((resolve, reject) => {
+    database.ref(`users/${userID}/chores/${choreID}`).remove((err) => {
+      if(err){
+        reject(err);
+      }else{
+        resolve(`removed chore ${choreID}`);
+      }
+    });
 
   });
 }
@@ -142,4 +149,5 @@ export {
   addUserToGroup,
   getGroups,
   deleteGroup,
+  deleteChore
 };
