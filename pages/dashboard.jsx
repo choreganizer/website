@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import withAuth from '../src/helper/auth';
 import { database, auth } from '../src/firebase/index';
 import { createGroup, addChore, getChores,
-         addUserToGroup, getGroups, deleteGroup} from '../src/firebase/helper'
+         addUserToGroup, getGroups, deleteGroup, deleteChore} from '../src/firebase/helper'
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -63,7 +63,14 @@ class Dashboard extends React.Component {
   }
 
   deleteChore = (choreID) => {
-    console.log(choreID);
+    /*console.log(choreID);*/
+    deleteChore(auth.currentUser.uid, choreID).then((value) => {
+      getChores(auth.currentUser.uid).then((value) => {
+        this.setState({
+          chores: value,
+        });
+      });
+    });
   }
 
   printButton = () => {
@@ -218,6 +225,41 @@ the $milkyWhite is named "link" */
                   </button>
                 </div>
                 {/*Vybhav's chores*/}
+                {!isInGroup ? (
+                  <fieldset disabled>
+                    <div className="field has-addons">
+                      <div className="control is-link">
+                        <input className="input" name="choreName" type="text" placeholder="Chore Name" />
+                      </div>
+                      <div className="control">
+                        <a className="button is-primary">
+                          Add Chore
+                        </a>
+                      </div>
+                    </div>
+                  </fieldset>
+                ) : (
+                  <div className="field "> /* has-addons*/
+                    <div className="control">
+                      <input className="input" name="choreName" type="text" placeholder="Chore Name" onChange={this.handleInputChange} />
+                    </div>
+                    <div className="control">
+                      <input className="input" name="assignedToUsername" type="text" placeholder="User Name" onChange={this.handleInputChange} />
+                    </div>
+                    <div className="select ">
+                      <select name="groupSelection" onChange={this.handleInputChange}>
+                        {groups.map(obj => (
+                          <option value={obj.groupID} key={obj.groupID}>{obj.groupName}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="control">
+                      <button className="button is-primary" type="button" onClick={() => addChore(groupSelection, choreName, assignedToUsername)}>
+                          <FontAwesomeIcon icon="plus-circle" size="1x" color="#91C7CE" />
+                      </button>
+                    </div>
+                  </div>
+                )}
 
               </div>
             </div>
