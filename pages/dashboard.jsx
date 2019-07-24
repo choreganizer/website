@@ -9,7 +9,7 @@ class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '', email: '', username: '', groups: [], chores: [], isInGroup: false,
+      name: '', email: '', username: '', groups: [], chores: [], isInGroup: false, currentGroup: ''
     };
   }
 
@@ -17,11 +17,6 @@ class Dashboard extends React.Component {
     getGroups(auth.currentUser.uid).then((value) => {
       this.setState({
         groups: value,
-      });
-      getChores(auth.currentUser.uid).then((chores) => {
-        this.setState({
-          chores,
-        });
       });
       const { groups } = this.state;
       database.ref(`/users/${auth.currentUser.uid}`).once('value').then((snapshot) => {
@@ -32,6 +27,13 @@ class Dashboard extends React.Component {
           groupSelection: groups.length <= 0 ? null : groups[0].groupID,
           groupSelectionForAddingToGroup: groups.length <= 0 ? null : groups[0].groupID,
           isInGroup: groups.length > 0,
+          currentGroup: groups.length <= 0 ? '' : groups[0].groupName
+        });
+        const groupID = groups.length <= 0 ? '' : groups[0].groupID
+        getChores(groupID).then((chores) => {
+          this.setState({
+            chores,
+          });
         });
       });
     });
@@ -39,7 +41,7 @@ class Dashboard extends React.Component {
 
   clickCreateGroup = () => {
     createGroup(this.state.addingGroupName, auth.currentUser.uid).then((gid) => {
-      console.log(gid);
+      // console.log(gid);
       // // this.setState({
       // //   groups: groups.push(gid),
       // // });
@@ -97,7 +99,7 @@ the $milkyWhite is named "link" */
   render() {
     const {
         chores, username, groups, isInGroup, groupSelection,
-        choreName, assignedToUsername, addingUsername, groupSelectionForAddingToGroup,
+        choreName, assignedToUsername, addingUsername, groupSelectionForAddingToGroup, currentGroup
       } = this.state;
     return (
       <div className="columns">
@@ -119,25 +121,28 @@ the $milkyWhite is named "link" */
               </div>
             </div>
           </div>
-          <div className="box buttons has-background-link">
-            {groups.map(obj => (
-              <button className="button is-fullwidth has-background-link has-text-warning" type="button" key={obj.groupID} onClick={() => this.deleteGroup(obj.groupID)}>{obj.groupName}</button>
-            ))}
-          </div>
-          <div className="box has-background-link">
-            <FontAwesomeIcon icon="home" size="2x" color="#91C7CE" />
-          </div>
-          <button className="button is-rounded is-funellwidth has-text-warning has-background-link" onClick={this.printButton}>
-            <FontAwesomeIcon icon="plus-circle" size="1x" color="#91C7CE" />
-            SET UP A HOUSE
-          </button>
+            {!isInGroup ? (
+              <div className="box has-background-link">
+                <h1 className="is-size-4 has-text-primary">CREATE A GROUP TO GET STARTED</h1>
+              </div>
+            ):(
+              <div className="box buttons has-background-link">
+                {groups.map(obj => (
+                  <div className="buttons has-addons" key={obj.groupID}>
+                  <span className="button has-background-link has-text-warning" onClick={() => this.switchGroup(obj.groupID)}>{obj.groupName}</span>
+                  <span className="button is-danger" onClick={() =>this.deleteGroup(obj.groupID)}><FontAwesomeIcon icon="minus-circle" size="1x"/></span>
+                </div>
+                ))}
+              </div>
+            )}
+
           <div className="field has-addons has-addons-centered">
             <div className="control">
               <input className="input" name="addingGroupName" type="text" placeholder="GroupName" onChange={this.handleInputChange} />
             </div>
             <div className="control">
               <button className="button is-primary" type="button" onClick={this.clickCreateGroup}>
-                <FontAwesomeIcon icon="plus-circle" size="1x" color="#91C7CE" />
+                <FontAwesomeIcon icon="plus-circle" size="1x"/>
               </button>
             </div>
           </div>
@@ -145,9 +150,15 @@ the $milkyWhite is named "link" */
         {/* Right side of website */}
         <div className="column">
           <div className="box has-background-link">
-            <h1 className="title is-size-3 is-size-5-mobile has-text-centered has-text-warning">
-                  Welcome Home, {username}
-            </h1>
+            {currentGroup === '' ? (
+              <h1 className="title is-size-3 is-size-5-mobile has-text-centered has-text-warning">
+                Welcome, {username}
+              </h1>
+            ):(
+                <h1 className="title is-size-3 is-size-5-mobile has-text-centered has-text-warning">
+                  Welcome to {currentGroup}, {username}
+                </h1>
+            )}
             {/* Center Visual: House Icon */}
             <figure className="image container is-480x800 has-text-centered">
               <FontAwesomeIcon icon="home" size="10x" color="#91C7CE" />
@@ -162,13 +173,18 @@ the $milkyWhite is named "link" */
             <div className="columns">
               <div className="column is-one-third">
                 <div className="box has-background-link">
-                  <label className="label has-text-centered has-text-warning has-text-weight-normal">Your Tasks</label>
+
+                  <label className="label has-text-centered has-text-warning has-text-weight-normal">Tasks</label>
                   {/*Vybhav's additions*/}
-                  <div className="buttons">
-                    {chores.map(obj => (
-                      <button className="button is-fullwidth has-text-left has-text-link has-background-warning" type="button" key={obj.choreID} onClick={() => this.deleteChore(obj.choreID)}>{obj.choreName}</button>
-                    ))}
-                  </div>
+                  {chores.length <= 0 ? (
+                    <h1 className="is-size-8 has-text-primary has-text-centered">YOU'RE ALL DONE!</h1>
+                  ) :(
+                      <div className="buttons">
+                        {chores.map(obj => (
+                          <button className="button is-fullwidth has-text-left has-text-link has-background-warning" type="button" key={obj.choreID} onClick={() => this.deleteChore(obj.choreID)}>{obj.choreName}</button>
+                        ))}
+                      </div>
+                  )}
                 </div>
               </div>
               <div className="column is-one-third">
@@ -184,23 +200,47 @@ the $milkyWhite is named "link" */
                     <FontAwesomeIcon icon="plus-circle" size="1x" color="#91C7CE" /> {/* color='primary' also works */}
                           ADD A MEMBER
                   </button>
-                  <div className="field has-addons has-addons-centered">
-                    <div className="control">
-                      <input className="input" name="addingUsername" type="text" placeholder="User Name" onChange={this.handleInputChange} />
-                    </div>
-                    <div className="select has-text-warning">
-                      <select name="groupSelectionForAddingToGroup has-text-warning" onChange={this.handleInputChange}>
-                        {groups.map(obj => (
-                          <option value={obj.groupID} key={obj.groupID}>{obj.groupName}</option>
-                        ))}
-                      </select>
-                    </div>
-                    <div className="control">
-                      <button className="button is-primary" type="button" onClick={() => addUserToGroup(addingUsername, groupSelectionForAddingToGroup)}>
-                        <FontAwesomeIcon icon="plus-circle" size="1x" color="#91C7CE" />
-                      </button>
-                    </div>
-                  </div>
+
+                  {!isInGroup ?(
+                    <fieldset disabled>
+                      <div className="field has-addons has-addons-centered">
+                        <div className="control">
+                          <input className="input" name="addingUsername" type="text" placeholder="User Name" onChange={this.handleInputChange} />
+                        </div>
+                        <div className="select has-text-warning">
+                          <select name="groupSelectionForAddingToGroup has-text-warning" onChange={this.handleInputChange}>
+                            {groups.map(obj => (
+                              <option value={obj.groupID} key={obj.groupID}>{obj.groupName}</option>
+                            ))}
+                          </select>
+                        </div>
+                        <div className="control">
+                          <button className="button is-primary" type="button" onClick={() => addUserToGroup(addingUsername, groupSelectionForAddingToGroup)}>
+                            <FontAwesomeIcon icon="plus-circle" size="1x" color="#91C7CE" />
+                          </button>
+                        </div>
+                      </div>
+                    </fieldset>
+                  ):(
+                      <div className="field has-addons has-addons-centered">
+                        <div className="control">
+                          <input className="input" name="addingUsername" type="text" placeholder="User Name" onChange={this.handleInputChange} />
+                        </div>
+                        <div className="select has-text-warning">
+                          <select name="groupSelectionForAddingToGroup has-text-warning" onChange={this.handleInputChange}>
+                            {groups.map(obj => (
+                              <option value={obj.groupID} key={obj.groupID}>{obj.groupName}</option>
+                            ))}
+                          </select>
+                        </div>
+                        <div className="control">
+                          <button className="button is-primary" type="button" onClick={() => addUserToGroup(addingUsername, groupSelectionForAddingToGroup)}>
+                            <FontAwesomeIcon icon="plus-circle" size="1x" color="#91C7CE" />
+                          </button>
+                        </div>
+                      </div>
+                  )}
+
                 </div>
               </div>
               <div className="column is-one-third">
@@ -210,20 +250,7 @@ the $milkyWhite is named "link" */
                 </button>
                 <div className="box is-invisible is-paddingless" /> {/* Spacer */}
                 {/* Add chore button */}
-                <button className="button is-rounded is-fullwidth has-background-link has-text-warning">
-                  <FontAwesomeIcon icon="plus-circle" size="1x" color="#91C7CE" />
-                        ADD CHORE
-                </button>
-                {/* Input field for adding chores */}
-                <div className="field">
-                  <div className="control">
-                    <input className="input" name="chore" type="text" placeholder="Vacuum the living room" />
-                  </div>
-                  {/* Submit button for adding chores, on-click will add chore to database */}
-                  <button className="button is-rounded has-text-warning has-background-link">
-                          Add
-                  </button>
-                </div>
+
                 {/*Vybhav's chores*/}
                 {!isInGroup ? (
                   <fieldset disabled>

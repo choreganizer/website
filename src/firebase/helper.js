@@ -61,10 +61,11 @@ async function addChore(groupID, chore, assignedToUserName) {
     }).then(() => {
       database.ref(`usernames/${assignedToUserName}/uid`).once('value').then((snapshot) => {
         const assignedToUID = snapshot.val();
-        database.ref(`users/${assignedToUID}/chores/${choreID}`).set({
+        choreRef.set({
           choreID,
           choreName: chore,
-          assignedFromGroup: groupID,
+          assignedToUserName,
+          assignedToUID,
         }, (err) => {
           if (err) {
             reject(err);
@@ -77,20 +78,23 @@ async function addChore(groupID, chore, assignedToUserName) {
   });
 }
 
-async function getChores(uid) {
+async function getChores(groupID) {
+  if(groupID === ''){
+    return [];
+  }
   return new Promise((resolve, reject) => {
-    database.ref(`users/${uid}/chores`).once('value').then((snapshot) => {
+    database.ref(`groups/${groupID}/chores`).once('value').then((snapshot) => {
       const chores = [];
-      snapshot.forEach((choreSnapshot) => {
+      Object.values(snapshot.val()).forEach((chore) =>{
         chores.push({
-          choreID: choreSnapshot.val().choreID,
-          choreName: choreSnapshot.val().choreName,
-          assignedFromGroup: choreSnapshot.val().assignedFromGroup,
+          choreID: chore.choreID,
+          choreName: chore.choreName,
+          assignedToUserName: chore.assignedToUserName,
+          assignedToUID: chore.assignedToUID,
         });
-      });
+      })
       resolve(chores);
-    })
-      .catch((err) => {
+    }).catch((err) => {
         reject(err);
       });
   });
@@ -98,7 +102,7 @@ async function getChores(uid) {
 
 async function addUserToGroup(username, groupID) {
   return new Promise((resolve, reject) => {
-    database.ref(`usernames/${username}/uid`).once('value').then((usernameSnapshot) => {
+    database.ref(`usernames/${username.toLowerCase()}/uid`).once('value').then((usernameSnapshot) => {
       const usernameUID = usernameSnapshot.val();
       database.ref(`groups/${groupID}/members/${usernameUID}`).set({
         usernameUID
@@ -131,14 +135,12 @@ async function deleteChore(userID, choreID){
 
 async function deleteGroup(authID, groupID) {
   return new Promise((resolve, reject) => {
-    database.ref(`groups/${groupID}`).remove(() => {
-      database.ref(`usergroups/${authID}/${groupID}`).remove((err) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(`removed from ${groupID}`);
-        }
-      });
+    database.ref(`usergroups/${authID}/${groupID}`).remove((err) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(`removed from ${groupID}`);
+      }
     });
   });
 }
