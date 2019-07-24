@@ -19,9 +19,12 @@ export default class login extends React.Component {
       auth.signInWithEmailAndPassword(mail, pass).then(() => {
         router.push('/dashboard');
       }).catch((err) => {
-        alert(err);
-        console.log(err);
+        Notification.error('Invalid username or password');
+        this.setState({ username: '', pass: '' });
       });
+    }).catch((err) => {
+      alert('Invalid username or password');
+      this.setState({ username: '', pass: '' });
     });
   }
 
@@ -34,6 +37,7 @@ export default class login extends React.Component {
   }
 
   render() {
+    const {username, pass} = this.state;
     return (
       <div className="columns is-centered">
         <div className="column is-two-fifths">
@@ -44,18 +48,18 @@ export default class login extends React.Component {
             <div className="field">
               <label className="label has-text-primary">USERNAME</label>
               <div className="control">
-                <input className="input" type="text" placeholder="choreboiz" onChange={this.handleUsernameChange} />
+                <input className="input" value={username} type="text" placeholder="choreboiz" onChange={this.handleUsernameChange} />
               </div>
             </div>
             <div className="field">
               <label className="label has-text-primary">PASSWORD</label>
               <p className="control is-expanded">
-                <input className="input" type="password" placeholder="Enter Password" onChange={this.handlePasswordChange} />
+                <input className="input" value={pass} type="password" placeholder="Enter Password" onChange={this.handlePasswordChange} />
               </p>
             </div>
             <div className="field">
               <p className="control">
-                <button className="button is-primary is-rounded is-fullwidth" type="submit" onClick={this.handleSignIn}>
+                <button className="button is-primary is-rounded is-fullwidth" type="submit" onSubmit={this.handleSignIn} onClick={this.handleSignIn}>
                   SUBMIT
                 </button>
               </p>

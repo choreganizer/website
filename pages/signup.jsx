@@ -19,14 +19,15 @@ export default class signup extends React.Component {
       if (snapshot.exists()) {
         usernameExists = true;
       }
-    });
-    if (password !== confirmedPass) {
-      alert("Passwords don't match");
-    } else if (usernameExists) {
-      alert('Username Exists');
-    } else {
-      auth.createUserWithEmailAndPassword(email, password)
-        .then(() => {
+    }).then(() => {
+      if (password !== confirmedPass) {
+        this.resetStates();
+        alert("Passwords don't match");
+      } else if (usernameExists) {
+        this.resetStates();
+        alert('Username Exists');
+      } else {
+        auth.createUserWithEmailAndPassword(email, password).then(() => {
           const { uid } = auth.currentUser;
           database.ref(`users/${uid}`).set({
             email,
@@ -38,14 +39,24 @@ export default class signup extends React.Component {
           }).then(() => {
             router.push('/dashboard');
           });
-        })
-        .catch((err) => {
-          alert('OOps something went wrong check your console');
-          console.log(err);
+        }).catch((err) => {
+          this.resetStates();
+          alert(err.message);
         });
-    }
+      }
+    }).catch((err) => {
+      alert("An error has occurred");
+    })
   }
 
+  resetStates = () => {
+    this.setState({
+      email: '',
+      username: '',
+      password: '',
+      confirmedPass: ''
+    });
+  }
   handleInputChange = (e) => {
     const { target } = e;
     const { value } = target;
@@ -53,32 +64,27 @@ export default class signup extends React.Component {
     this.setState({
       [name]: value,
     });
-    console.log(value);
-  }
-
-  uploadImage = () => {
-    alert('Change this later to maybe a new page to make it easier');
   }
 
   render() {
+    const {username, password, email, confirmedPass} = this.state;
     return (
       <div className="columns is-centered">
         <div className="column is-two-fifths">
           <div className="box">
-            <figure className="image container is-96x96 is-centered">
-              <img className="is-rounded" alt="user profile" src="https://bulma.io/images/placeholders/96x96.png" />
-            </figure>
-            <a className="button is-small is-fullwidth is-text has-text-grey" style={{ opacity: '1', boxShadow: 'none' }}>Upload a profile picture</a>
+            <h1 className="title is-size-3 is-size-5-mobile has-text-centered has-text-primary">
+              WELCOME TO CHOREGANIZER!
+            </h1>
             <div className="field">
               <label className="label has-text-primary">USERNAME</label>
               <div className="control">
-                <input className="input" name="username" type="text" onChange={this.handleInputChange} placeholder="choreboiz" />
+                <input className="input" name="username" value={username} type="text" onChange={this.handleInputChange} placeholder="choreboiz" />
               </div>
             </div>
             <div className="field">
               <label className="label has-text-primary">EMAIL</label>
               <div className="control">
-                <input className="input" name="email" type="email" onChange={this.handleInputChange} placeholder="choreboiz@choreganizer.com" />
+                <input className="input" name="email" value={email} type="email" onChange={this.handleInputChange} placeholder="choreboiz@choreganizer.com" />
               </div>
             </div>
             <label className="label has-text-primary">PASSWORD</label>
@@ -86,12 +92,12 @@ export default class signup extends React.Component {
               <div className="field-body">
                 <div className="field">
                   <p className="control is-expanded">
-                    <input className="input" name="password" type="password" onChange={this.handleInputChange} placeholder="Enter Password" />
+                    <input className="input" name="password" value={password} type="password" onChange={this.handleInputChange} placeholder="Enter Password" />
                   </p>
                 </div>
                 <div className="field">
                   <p className="control is-expanded">
-                    <input className="input" name="confirmedPass" type="password" onChange={this.handleInputChange} placeholder="Confirm Password" />
+                    <input className="input" name="confirmedPass" value={confirmedPass} type="password" onChange={this.handleInputChange} placeholder="Confirm Password" />
                   </p>
                 </div>
               </div>
