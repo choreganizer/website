@@ -9,7 +9,7 @@ class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '', email: '', username: '', groups: [], chores: [], isInGroup: false, currentGroup: ''
+      name: '', email: '', username: '', groups: [], chores: [], isInGroup: false, currentGroup: '', currentGroupId:''
     };
   }
 
@@ -27,7 +27,8 @@ class Dashboard extends React.Component {
           groupSelection: groups.length <= 0 ? null : groups[0].groupID,
           groupSelectionForAddingToGroup: groups.length <= 0 ? null : groups[0].groupID,
           isInGroup: groups.length > 0,
-          currentGroup: groups.length <= 0 ? '' : groups[0].groupName
+          currentGroup: groups.length <= 0 ? '' : groups[0].groupName,
+          currentGroupId: groups.length <= 0 ? '' : groups[0].groupID
         });
         const groupID = groups.length <= 0 ? '' : groups[0].groupID
         getChores(groupID).then((chores) => {
@@ -66,8 +67,8 @@ class Dashboard extends React.Component {
 
   deleteChore = (choreID) => {
     /*console.log(choreID);*/
-    deleteChore(auth.currentUser.uid, choreID).then((value) => {
-      getChores(auth.currentUser.uid).then((value) => {
+    deleteChore(this.state.currentGroupId, choreID).then((value) => {
+      getChores(this.state.currentGroupId).then((value) => {
         this.setState({
           chores: value,
         });

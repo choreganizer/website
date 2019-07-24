@@ -85,14 +85,16 @@ async function getChores(groupID) {
   return new Promise((resolve, reject) => {
     database.ref(`groups/${groupID}/chores`).once('value').then((snapshot) => {
       const chores = [];
-      Object.values(snapshot.val()).forEach((chore) =>{
-        chores.push({
-          choreID: chore.choreID,
-          choreName: chore.choreName,
-          assignedToUserName: chore.assignedToUserName,
-          assignedToUID: chore.assignedToUID,
-        });
-      })
+      if(snapshot.exists()){
+        Object.values(snapshot.val()).forEach((chore) => {
+          chores.push({
+            choreID: chore.choreID,
+            choreName: chore.choreName,
+            assignedToUserName: chore.assignedToUserName,
+            assignedToUID: chore.assignedToUID,
+          });
+        })
+      }
       resolve(chores);
     }).catch((err) => {
         reject(err);
@@ -120,9 +122,9 @@ async function addUserToGroup(username, groupID) {
   });
 }
 
-async function deleteChore(userID, choreID){
+async function deleteChore(groupID, choreID){
   return new Promise((resolve, reject) => {
-    database.ref(`users/${userID}/chores/${choreID}`).remove((err) => {
+    database.ref(`groups/${groupID}/chores/${choreID}`).remove((err) => {
       if(err){
         reject(err);
       }else{
