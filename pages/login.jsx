@@ -11,15 +11,13 @@ export default class login extends React.Component {
   handleSignIn = () => {
     const { username, pass } = this.state;
     let mail = '';
-    database.ref(`usernames/${username}/email`).once('value', (usernameSnapshot) => {
-      // console.log(usernameSnapshot.val().email);
+    database.ref(`usernames/${username.toLowerCase()}/email`).once('value', (usernameSnapshot) => {
       mail = usernameSnapshot.val();
     }).then(() => {
-      // console.log(email);
       auth.signInWithEmailAndPassword(mail, pass).then(() => {
         router.push('/dashboard');
       }).catch((err) => {
-        Notification.error('Invalid username or password');
+        alert('Invalid username or password')
         this.setState({ username: '', pass: '' });
       });
     }).catch((err) => {

@@ -15,7 +15,7 @@ export default class signup extends React.Component {
       email, username, password, confirmedPass,
     } = this.state;
     let usernameExists = false;
-    database.ref(`usernames/${username}`).once('value', (snapshot) => {
+    database.ref(`usernames/${username.toLowerCase()}`).once('value', (snapshot) => {
       if (snapshot.exists()) {
         usernameExists = true;
       }
@@ -33,7 +33,7 @@ export default class signup extends React.Component {
             email,
             username,
           });
-          database.ref(`usernames/${username}`).set({
+          database.ref(`usernames/${username.toLowerCase()}`).set({
             uid,
             email,
           }).then(() => {
@@ -44,8 +44,6 @@ export default class signup extends React.Component {
           alert(err.message);
         });
       }
-    }).catch((err) => {
-      alert("An error has occurred");
     })
   }
 
