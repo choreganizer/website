@@ -19,6 +19,7 @@ export default class login extends React.Component {
       auth.signInWithEmailAndPassword(mail, pass).then(() => {
         router.push('/dashboard');
       }).catch((err) => {
+        alert(err);
         console.log(err);
       });
     });
@@ -55,7 +56,7 @@ export default class login extends React.Component {
             <div className="field">
               <p className="control">
                 <button className="button is-primary is-rounded is-fullwidth" type="submit" onClick={this.handleSignIn}>
-                  LOGIN
+                  SUBMIT
                 </button>
               </p>
             </div>

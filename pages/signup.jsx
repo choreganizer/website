@@ -99,7 +99,7 @@ export default class signup extends React.Component {
             <div className="field">
               <p className="control">
                 <button className="button is-primary is-rounded is-fullwidth" type="submit" onClick={this.handleSignUp}>
-                  SIGN UP
+                  SUBMIT
                 </button>
               </p>
             </div>
