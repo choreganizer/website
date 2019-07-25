@@ -127,7 +127,7 @@ the $milkyWhite is named "link" */
                 <h1 className="is-size-4 has-text-primary">CREATE A GROUP TO GET STARTED</h1>
               </div>
             ):(
-              <div className="box buttons has-background-link">
+              <div className="box has-background-link">
                 {groups.map(obj => (
                   <div className="buttons has-addons" key={obj.groupID}>
                   <span className="button has-background-link has-text-warning" onClick={() => this.switchGroup(obj.groupID)}>{obj.groupName}</span>
@@ -191,38 +191,27 @@ the $milkyWhite is named "link" */
               <div className="column is-one-third">
                 <div className="box has-background-link">
                   <label className="label has-text-centered has-text-warning has-text-weight-normal">Members</label>
-                  <button className="button is-fullwidth has-text-link has-background-warning">
-                          Vania
-                  </button>
-                  <button className="button is-fullwidth has-text-link has-background-warning">
-                          Ayden, etc.
-                  </button>
-                  <button className="button is-rounded is-fullwidth has-text-warning has-background-link">
-                    <FontAwesomeIcon icon="plus-circle" size="1x" color="#91C7CE" /> {/* color='primary' also works */}
-                          ADD A MEMBER
-                  </button>
-
-                  {!isInGroup ?(
-                    <fieldset disabled>
-                      <div className="field has-addons has-addons-centered">
-                        <div className="control">
-                          <input className="input" name="addingUsername" type="text" placeholder="User Name" onChange={this.handleInputChange} />
+                    {!isInGroup ?(
+                      <fieldset disabled>
+                        <div className="field has-addons has-addons-centered">
+                          <div className="control">
+                            <input className="input" name="addingUsername" type="text" placeholder="User Name" onChange={this.handleInputChange} />
+                          </div>
+                          <div className="select has-text-warning">
+                            <select name="groupSelectionForAddingToGroup has-text-warning" onChange={this.handleInputChange}>
+                              {groups.map(obj => (
+                                <option value={obj.groupID} key={obj.groupID}>{obj.groupName}</option>
+                              ))}
+                            </select>
+                          </div>
+                          <div className="control">
+                            <button className="button is-primary" type="button" onClick={() => addUserToGroup(addingUsername, groupSelectionForAddingToGroup)}>
+                              <FontAwesomeIcon icon="plus-circle" size="1x" color="#91C7CE" />
+                            </button>
+                          </div>
                         </div>
-                        <div className="select has-text-warning">
-                          <select name="groupSelectionForAddingToGroup has-text-warning" onChange={this.handleInputChange}>
-                            {groups.map(obj => (
-                              <option value={obj.groupID} key={obj.groupID}>{obj.groupName}</option>
-                            ))}
-                          </select>
-                        </div>
-                        <div className="control">
-                          <button className="button is-primary" type="button" onClick={() => addUserToGroup(addingUsername, groupSelectionForAddingToGroup)}>
-                            <FontAwesomeIcon icon="plus-circle" size="1x" color="#91C7CE" />
-                          </button>
-                        </div>
-                      </div>
-                    </fieldset>
-                  ):(
+                      </fieldset>
+                    ):(
                       <div className="field has-addons has-addons-centered">
                         <div className="control">
                           <input className="input" name="addingUsername" type="text" placeholder="User Name" onChange={this.handleInputChange} />
@@ -241,15 +230,14 @@ the $milkyWhite is named "link" */
                         </div>
                       </div>
                   )}
-
                 </div>
               </div>
               <div className="column is-one-third">
-                <button className="button is-fullwidth has-text-warning has-background-link">
+                {/* <button className="button is-fullwidth has-text-warning has-background-link">
                   <FontAwesomeIcon icon="edit" color="#91C7CE" />
                         Edit House
-                </button>
-                <div className="box is-invisible is-paddingless" /> {/* Spacer */}
+                </button> */}
+                {/* <div className="box is-invisible is-paddingless" /> Spacer */}
                 {/* Add chore button */}
 
                 {/*Vybhav's chores*/}
@@ -288,11 +276,10 @@ the $milkyWhite is named "link" */
                     </div>
                   </div>
                 )}
-
               </div>
             </div>
-            <div className="field" />
-            <div className="box is-invisible" />
+            {/* <div className="field" /> */}
+            {/* <div className="box is-invisible" /> */}
           </div>
         </div>
       </div>
