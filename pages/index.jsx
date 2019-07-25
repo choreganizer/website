@@ -11,7 +11,7 @@ export default () => (
       </div>
       <div className="column is-half">
         <h1 className="title has-text-link is-size-1">CREATE CHORES</h1>
-        <p className="subtitle is-size-4 has-text-link">With Choreganizer, you can create multiple chores which you can assign to respective housemates!</p>
+        <p className="subtitle is-size-4 has-text-link">With <i>Choreganizer</i>, you can create multiple chores which you can assign to respective housemates!</p>
       </div>
       <div className="column is-half">
         <h1 className="title has-text-link is-size-1 has-text-right">HOLD PEOPLE ACCOUNTABLE</h1>
@@ -29,8 +29,7 @@ export default () => (
       </div>
       <div className="column is-half">
         <h1 className="title has-text-link is-size-1">CLEAN HOUSE, CLEAN MIND</h1>
-        <p className="subtitle is-size-4 has-text-link"><i>Choreganizer</i> helps you and your housemates maintain a
-        a squeaky clean home without the stress!</p>
+        <p className="subtitle is-size-4 has-text-link"><i>Choreganizer</i> helps you and your housemates maintain a squeaky clean home without the stress!</p>
       </div>
     </div>
 
