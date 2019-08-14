@@ -33,12 +33,8 @@ export default () => (
       </div>
     </div>
 
-    <div className="columns is-vcentered">
+    <div className="columns is-vcentered" />
 
-    </div>
-
-    <div className="columns is-vcentered">
-
-    </div>
+    <div className="columns is-vcentered" />
   </div>
 );
