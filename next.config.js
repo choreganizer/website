@@ -1,13 +1,14 @@
 const withSass = require('@zeit/next-sass');
 const withOffline = require('next-offline');
 const webpack = require('webpack');
-require('dotenv').config()
+require('dotenv').config();
 
-module.exports = withSass(withOffline({webpack: config => {
-    // Fixes npm packages that depend on `fs` module
-    // config.node = {
-    //   fs: 'empty'
-    // }
+module.exports = withSass(withOffline({
+  webpack: (config) => {
+  // Fixes npm packages that depend on `fs` module
+  // config.node = {
+  //   fs: 'empty'
+  // }
 
     // config.optimization.minimize = false;
 
@@ -17,6 +18,6 @@ module.exports = withSass(withOffline({webpack: config => {
     }, {});
 
     config.plugins.push(new webpack.DefinePlugin(env));
-    return config
-  }
+    return config;
+  },
 }));
